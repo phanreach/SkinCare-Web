@@ -1,122 +1,94 @@
-<!-- Footer -->
-<footer class="text-center text-lg-start bg-body-tertiary text-muted">
-  <!-- Section: Social media -->
-  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-    <!-- Left -->
-    <div class="me-5 d-none d-lg-block">
-      <span>Get connected with us on social networks:</span>
-    </div>
-    <!-- Left -->
-
-    <!-- Right -->
-    <div>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-google"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-linkedin"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-    <!-- Right -->
-  </section>
-  <!-- Section: Social media -->
-
-  <!-- Section: Links  -->
-  <section class="">
-    <div class="container text-center text-md-start mt-5">
-      <!-- Grid row -->
-      <div class="row mt-3">
-        <!-- Grid column -->
-        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-          <!-- Content -->
-          <h6 class="text-uppercase fw-bold mb-4">
-            <i class="fas fa-gem me-3"></i>Company name
-          </h6>
-          <p>
-            Here you can use rows and columns to organize your footer content. Lorem ipsum
-            dolor sit amet, consectetur adipisicing elit.
+<footer class="bg-light text-dark py-5">
+    <div class="container">
+      <!-- Main Footer Content -->
+      <div class="row g-4 mb-4">
+        <!-- Company Info -->
+        <div class="col-md-4">
+          <div class="d-flex align-items-center mb-3">
+            <img src="{{ asset('storage/weyoung_logo.jpg') }}" alt="WeYoung Logo" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
+            <h4 class="fw-bold mb-0">WeYoung</h4>
+          </div>
+          <p class="mb-4">
+            We provide the best service and products to all dear customers. Our commitment is to bring beauty and confidence to everyone through high-quality beauty products.
           </p>
+          <div class="d-flex align-items-center mb-2">
+            <i class="bi bi-geo-alt-fill me-2 fs-5"></i>
+            <p class="mb-0">Phnom Penh, Cambodia</p>
+          </div>
+          <div class="d-flex align-items-center mb-2">
+            <i class="bi bi-envelope-fill me-2 fs-5"></i>
+            <p class="mb-0">WeYoung@weyoung.com</p>
+          </div>
+          <div class="d-flex align-items-center">
+            <i class="bi bi-telephone-fill me-2 fs-5"></i>
+            <p class="mb-0">(+855) 10 203 405</p>
+          </div>
         </div>
-        <!-- Grid column -->
 
-        <!-- Grid column -->
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">
-            Products
-          </h6>
-          <p>
-            <a href="#!" class="text-reset">Angular</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">React</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Vue</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Laravel</a>
-          </p>
+        <!-- Quick Links -->
+        <div class="col-6 col-md-2">
+          <h5 class="fw-bold mb-3">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="#" class="text-dark text-decoration-none d-block hover-link">Home</a></li>
+            <li class="mb-2"><a href="#" class="text-dark text-decoration-none d-block hover-link">About Us</a></li>
+            <li class="mb-2"><a href="#" class="text-dark text-decoration-none d-block hover-link">Products</a></li>
+            <li class="mb-2"><a href="#" class="text-dark text-decoration-none d-block hover-link">Contact</a></li>
+            <li><a href="#" class="text-dark text-decoration-none d-block hover-link">FAQ</a></li>
+          </ul>
         </div>
-        <!-- Grid column -->
 
-        <!-- Grid column -->
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">
-            Useful links
-          </h6>
-          <p>
-            <a href="#!" class="text-reset">Pricing</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Settings</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Orders</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Help</a>
-          </p>
+        <!-- Products Links -->
+        <div class="col-6 col-md-2">
+          <h5 class="fw-bold mb-3">Products</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="#" class="text-dark text-decoration-none d-block hover-link">Sunscreen</a></li>
+            <li class="mb-2"><a href="#" class="text-dark text-decoration-none d-block hover-link">Cushion</a></li>
+            <li class="mb-2"><a href="#" class="text-dark text-decoration-none d-block hover-link">Skin Care</a></li>
+            <li><a href="#" class="text-dark text-decoration-none d-block hover-link">Makeup</a></li>
+          </ul>
         </div>
-        <!-- Grid column -->
 
-        <!-- Grid column -->
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-          <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
-          <p>
-            <i class="fas fa-envelope me-3"></i>
-            info@example.com
-          </p>
-          <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-          <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+        <!-- Follow Us Links -->
+        <div class="col-md-4">
+          <h5 class="fw-bold mb-3">Follow Us</h5>
+          <p class="mb-3">Stay connected with us on social media for the latest updates and beauty tips.</p>
+          <div class="d-flex gap-3">
+            <a href="https://www.facebook.com/profile.php?id=61550118309445" class="text-decoration-none">
+              <div class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                <i class="bi bi-facebook fs-5"></i>
+              </div>
+            </a>
+            <a href="https://www.instagram.com/weyoung_cambodia/" class="text-decoration-none">
+              <div class="btn btn-danger rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                <i class="bi bi-instagram fs-5"></i>
+              </div>
+            </a>
+            <a href="#" class="text-decoration-none">
+              <div class="btn btn-info text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                <i class="bi bi-telegram fs-5"></i>
+              </div>
+            </a>
+            <a href="#" class="text-decoration-none">
+              <div class="btn btn-dark rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                <i class="bi bi-tiktok fs-5"></i>
+              </div>
+            </a>
+          </div>
         </div>
-        <!-- Grid column -->
       </div>
-      <!-- Grid row -->
-    </div>
-  </section>
-  <!-- Section: Links  -->
 
-  <!-- Copyright -->
-  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-    © 2021 Copyright:
-    <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-  </div>
-  <!-- Copyright -->
-</footer>
-<!-- Footer -->
+      <hr>
+
+      <!-- Copyright Section -->
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+          <p class="mb-0">© 2025 Copyright <a href="#" class="text-dark fw-bold text-decoration-none">WeYoung.com</a></p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <a href="#" class="text-dark text-decoration-none me-3">Privacy Policy</a>
+          <a href="#" class="text-dark text-decoration-none me-3">Terms of Use</a>
+          <a href="#" class="text-dark text-decoration-none">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>

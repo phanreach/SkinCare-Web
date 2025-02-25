@@ -13,7 +13,7 @@
             <!-- Brand -->
             <a class="navbar-brand d-flex align-items-center" href="home">
                 <img src="{{ asset('storage/weyoung_logo.jpg') }}" alt="We Young Logo" class="rounded-circle me-2" style="width: 40px; height: 40px;">
-                <span class="h4 mb-0 ">WE YOUNG</span>
+                <span class="h5 fw-bold mb-0">WeYoung</span>
             </a>
 
             <!-- Mobile Toggle Button -->
@@ -45,10 +45,6 @@
                             <i class="bi bi-envelope me-1"></i>Contact
                         </a>
                     </li>
-                    <form class="form-inline my-lg-0">
-                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    </form>
-
                 </ul>
 
                 <!-- User Profile & Notifications -->
@@ -57,8 +53,7 @@
                     <div class="position-relative">
                         <button class="btn btn-light rounded-circle position-relative">
                             <i class="bi bi-bell"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                2
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">2
                                 <span class="visually-hidden">unread notifications</span>
                             </span>
                         </button>
