@@ -12,7 +12,6 @@
         <div class="container">
             <!-- Brand -->
             <a class="navbar-brand d-flex align-items-center" href="home">
-                <img src="{{ asset('storage/weyoung_logo.jpg') }}" alt="We Young Logo" class="rounded-circle me-2" style="width: 40px; height: 40px;">
                 <span class="h5 fw-bold mb-0">WeYoung</span>
             </a>
 
@@ -31,20 +30,24 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-3 {{ request()->is('/about') ? 'active fw-bold' : '' }} fw-bold" href="/about">
-                            <i class="bi bi-info-circle me-1"></i>About
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link px-3 {{ request()->is('/product') ? 'active fw-bold' : '' }} fw-bold" href="/product">
                             <i class="bi bi-box me-1"></i>Product
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-3 {{ request()->is('/contact') ? 'active fw-bold' : '' }} fw-bold" href="/contact">
-                            <i class="bi bi-envelope me-1"></i>Contact
+                        <a class="nav-link px-3 {{ request()->is('/order') ? 'active fw-bold' : '' }} fw-bold" href="/order">
+                            <i class="bi bi-bag-check"></i> Order
                         </a>
                     </li>
+                    @auth 
+                    @if(auth()->user()->role === "user")
+                    <li class="nav-item">
+                        <a class="nav-link px-3 {{ request()->is('/order') ? 'active fw-bold' : '' }} fw-bold" href="/cart">
+                            <i class="bi bi-cart-check"></i> Cart
+                        </a>
+                    </li>
+                    @endif
+                    @endauth 
                 </ul>
 
                 <!-- User Profile & Notifications -->
@@ -68,7 +71,13 @@
                             <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
                             <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                        
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="bi bi-box-arrow-right me-2"></i>Logout
+                                </button>
+                            </form>
                         </ul>
                     </div>
                 </div>

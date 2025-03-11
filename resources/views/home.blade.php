@@ -1,4 +1,5 @@
 <x-app-layout>
+  @include('create_promotion')
   <!-- Hero Carousel with Improved Indicators and Controls -->
   <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-indicators">
@@ -33,11 +34,15 @@
     <div class="container">
     <div class="row align-items-center">
       <h2 class="col display-5 text-center fw-bold mb-5">Our Categories</h2>
-      <div class="col-auto">
-        <button class="btn btn-primary rounded-pill">
-          <i class="bi bi-plus-lg"></i>
-        </button>
-      </div>
+      @auth 
+        @if(auth()->user()->role == 'admin')
+          <div class="col-auto">
+            <button class="btn btn-primary rounded-pill">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        @endif
+      @endauth 
     </div>
       
       <div class="row g-4">
@@ -95,11 +100,21 @@
   </section>
 
   <!-- Promotions Section with Enhanced Design -->
-  <section id="promotions" class="py-5">
+  <section id="promotions" class="py-5" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="display-5 fw-bold">Current Promotions</h2>
+      <div class="row text-center mb-5">
+        <h2 class="col display-5 fw-bold">Current Promotions</h2>
+        @auth
+          @if(auth()->user()->role == 'admin')
+              <div class="col-auto">
+                  <button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#addPromotion">
+                      <i class="bi bi-plus-lg"></i>
+                  </button>
+              </div>
+          @endif
+      @endauth
         <p class="lead text-muted">Limited time offers you don't want to miss</p>
+       
       </div>
       <div class="row justify-content-center g-4">
         <div class="col-md-4">
@@ -167,8 +182,10 @@
       </div>
     </div>
   </div>
+  
 </div>
     </div>
+   
   </section>
 
   <!-- Testimonials Section (New) -->

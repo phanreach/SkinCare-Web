@@ -16,99 +16,94 @@
                                 <i class="bi bi-search"></i>
                             </button>
                         </form>
-                        <a href="{{ route('product.create') }}" class="btn btn-primary shadow-sm">Add Product</a>
+
+                        @auth
+                            @if(auth()->user()->role === "admin")
+                                <a class="btn btn-primary shadow-sm" href="{{ route('product.create') }}">Add Product</a>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- modal -->
-    <div class="modal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- Success Message -->
     @if(session()->has('success'))
         <div class="container">
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="fas fa-check-circle me-2"></i>{{session('success')}}
+                <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
     @endif
 
-<div class="container mb-4">
-    <div class="row g-5">
-        @foreach($products as $product)
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card h-100 border-0 shadow-sm hover-shadow transition-all d-flex flex-column">
-                <div class="position-relative">
-                    <!-- Product Image -->
-                    <img src="{{ asset('storage/' . $product->picture) }}" 
-                         class="card-img-top object-fit-cover"
-                         style="height: 200px"
-                         alt="{{$product->name}}">
+    <!-- Products Section -->
+    <div class="container mb-4">
+        <div class="row g-5">
+            @foreach($products as $product)
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm hover-shadow transition-all d-flex flex-column">
+                        <div class="position-relative">
+                            <!-- Product Image -->
+                            <a href="{{ route('product.detail', $product->id) }}">
+                                <img src="{{ asset($product->images->isNotEmpty() ? 'storage/' . $product->images->first()->image_path : 'storage/default-image.jpg') }}"
+                                     class="card-img-top object-fit-cover"
+                                     style="height: 200px"
+                                     alt="{{ $product->name }}">
+                            </a>
 
-                    <!-- Dropdown Menu -->
-                    <div class="position-absolute top-0 start-0 p-2">
-                        <div class="dropdown">
-                            <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('product.edit', $product->id) }}">
-                                    <i class="fas fa-edit me-2"></i> Edit</a></li>
-                                <li>
-                                    <form action="{{ route('product.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="dropdown-item text-danger">
-                                            <i class="fas fa-trash-alt me-2"></i> Delete
-                                        </button>
-                                    </form>
-                                </li>
-                            </ul>
+                            <!-- Admin Dropdown Menu -->
+                            @auth
+                                @if(auth()->user()->role === "admin")
+                                    <div class="position-absolute top-0 start-0 p-2">
+                                        <div class="dropdown">
+                                            <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="{{ route('product.edit', $product->id) }}">
+                                                    <i class="fas fa-edit me-2"></i> Edit</a>
+                                                </li>
+                                                <li>
+                                                    <form action="{{ route('product.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="dropdown-item text-danger">
+                                                            <i class="fas fa-trash-alt me-2"></i> Delete
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endauth
                         </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body d-flex flex-column flex-grow-1">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="h5 fw-bold text-dark mb-0">$ {{ number_format($product->price, 2) }}</span>
+                                <button class="btn btn-outline-danger btn-sm rounded-circle p-1 d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">
+                                    <i class="bi bi-suit-heart"></i>
+                                </button>
+                            </div>
+                            <a href="{{ route('product.detail', $product->id) }}" class="text-decoration-none text-dark">
+                                <h5 class="card-title fw-bold text-truncate mb-2">{{ $product->name }}</h5>
+                            </a>
+                            <p class="card-text text-muted flex-grow-1 overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
+                                {{ Str::limit($product->description, 100) }}
+                            </p>
+                        </div>                
                     </div>
                 </div>
-
-                <!-- Card Body -->
-                <div class="card-body d-flex flex-column flex-grow-1">
-                    <p class="fw-bold mb-2">$ {{$product->price}}</p>
-                    <h5 class="card-title fw-bold text-truncate mb-2">{{$product->name}}</h5>
-                    <p class="card-text text-muted flex-grow-1 overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
-                        {{Str::limit($product->description, 100)}}
-                    </p>
-                </div>
-
-                <!-- Order Button -->
-                <div class="card-footer bg-white border-0 pt-0 pb-3">
-                    <button class="btn btn-outline-primary hover-lift justify-content-md-center">
-                        <i class="bi bi-cart"></i> Order Now
-                    </button>
-                </div>
-            </div>
+            @endforeach
         </div>
-        @endforeach
     </div>
-</div>
-
 
     @include('layouts.footer')
+
     <style>
         .hover-shadow:hover {
             transform: translateY(-5px);

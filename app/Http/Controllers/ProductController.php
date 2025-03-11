@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductImage; // Fix: Import ProductImage model
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('images')->get();
         return view('products.product', ['products' => $products]);
+    }
+
+    public function detail($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('products.product_detail', ['product' => $product]);
     }
 
     public function create()
@@ -22,17 +29,28 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'pictures.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Fix: Validate multiple images
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
             'description' => 'nullable|string'
         ]);
 
-        if ($request->hasFile('picture')) {
-            $data['picture'] = $request->file('picture')->store('products', 'public');
-        }
+        $product = Product::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'description' => $request->description
+        ]);
 
-        Product::create($data);
+        if ($request->hasFile('pictures')) {
+            foreach ($request->file('pictures') as $picture) {
+                $path = $picture->store('products', 'public'); 
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_path' => $path
+                ]);
+            }
+        }
 
         return redirect()->route('product.index')->with('success', 'Product created successfully!');
     }
@@ -45,33 +63,47 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $data = $request->validate([
-            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'pictures.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Fix: Allow multiple images
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
             'description' => 'nullable|string'
         ]);
 
-        if ($request->hasFile('picture')) {
-            // Delete the old picture
-            if ($product->picture) {
-                Storage::disk('public')->delete($product->picture);
-            }
-            // Store the new picture
-            $data['picture'] = $request->file('picture')->store('products', 'public');
-        }
+        $product->update([
+            'name' => $request->name,
+            'price' => $request->price,
+            'description' => $request->description
+        ]);
 
-        $product->update($data);
+        if ($request->hasFile('pictures')) {
+            // Delete old images
+            foreach ($product->images as $image) {
+                Storage::disk('public')->delete($image->image_path);
+                $image->delete();
+            }
+
+            // Store new images
+            foreach ($request->file('pictures') as $picture) {
+                $path = $picture->store('products', 'public');
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_path' => $path
+                ]);
+            }
+        }
 
         return redirect(route('product.index'))->with('success', 'Product updated successfully!');
     }
 
     public function destroy(Product $product)
     {
-        // Delete the product image
-        if ($product->picture) {
-            Storage::disk('public')->delete($product->picture);
+        // Fix: Delete all associated images
+        foreach ($product->images as $image) {
+            Storage::disk('public')->delete($image->image_path);
+            $image->delete();
         }
-        
+
         $product->delete();
 
         return redirect(route('product.index'))->with('success', 'Product deleted successfully!');

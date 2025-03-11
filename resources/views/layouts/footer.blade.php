@@ -42,7 +42,7 @@
           <h5 class="fw-bold mb-3">Products</h5>
           <ul class="list-unstyled">
             <li class="mb-2"><a href="#" class="text-dark text-decoration-none d-block hover-link">Sunscreen</a></li>
-            <li class="mb-2"><a href="#" class="text-dark text-decoration-none d-block hover-link">Cushion</a></li>
+            <li class="mb-2"><a href="#" class="text-dark text-decoration-none d-block hover-link">Cusion</a></li>
             <li class="mb-2"><a href="#" class="text-dark text-decoration-none d-block hover-link">Skin Care</a></li>
             <li><a href="#" class="text-dark text-decoration-none d-block hover-link">Makeup</a></li>
           </ul>
